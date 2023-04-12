@@ -1,0 +1,91 @@
+<html>
+<head>
+	<title>Farmer's Login Page</title>
+	<style>
+		.login-form {
+			margin: 0 auto;
+
+			padding: 20px;
+			background-color: #f2f2f2;
+			border-radius: 5px;
+            
+            width: 500px;
+            
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+		}
+		
+		h1 {
+			text-align: center;
+		}
+		
+		label {
+			display: block;
+			margin-bottom: 5px;
+			font-weight: bold;
+		}
+		
+		input[type="email"], input[type="password"] {
+			display: block;
+			margin-bottom: 20px;
+			padding: 10px;
+			border-radius: 5px;
+			border: none;
+			width: 100%;
+		}
+		
+		input[type="submit"] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		
+		input[type="submit"]:hover {
+			background-color: #3e8e41;
+		}
+	</style>		
+	</head>
+<body></head>
+<body>
+	<div class="login-form">
+		<h1>Farmer's Login</h1>
+		
+		<form name="loginForm" onsubmit="return validateForm()" method="post">
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" ><br><br>
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" ><br><br>
+			<!--<button type="submit">Login</button>
+				<p><a href="{{url_for("farmers_signup")}}"><button class=grey style="height:50px;width:100px">submit</button></a></p>
+		
+			-->
+			<a href="{{url_for("farmer_signin_submit")}}"><input type="submit" value="Login"></a>
+
+		</form>
+			
+		<p>Don't have account? <a href="{{url_for("farmers_signup")}}">Sign up here.</a></p>
+	</div>
+	<script >
+		function validateForm() {
+			var email = document.forms["loginForm"]["email"].value;
+			var password = document.forms["loginForm"]["password"].value;
+		
+			if (email == "") {
+				alert("Email must be filled out");
+				return false;
+			}
+		
+			if (password == "") {
+				alert("Password must be filled out");
+				return false;
+			}
+		}
+		
+	</script>
+</body>
+</html>

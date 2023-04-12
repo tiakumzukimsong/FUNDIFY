@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Donation Request Form</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+      }
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        background-color: #eee;
+        padding: 10px;
+        font-size: 16px;
+      }
+      
+      .nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+      
+      .nav li {
+        margin: 0 10px;
+      }
+      
+      .nav a {
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      
+      .nav a:hover {
+        text-decoration: underline;
+      }
+      
+      .header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      
+      h1 {
+        margin-top: 0;
+      }
+      
+      .form {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #333;
+      }
+      
+      input[type="text"],
+      input[type="email"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+      }
+      
+      textarea {
+        height: 150px;
+      }
+      
+      input[type="submit"] {
+        display: block;
+        padding: 10px 20px;
+        background-color: #333;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      input[type="submit"]:hover {
+        background-color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Donation Request Form</h1>
+    </div>
+    <div class="nav">
+      <ul>
+        <li><a href="{{url_for("farmer_signin_submit")}}">Home</a></li>
+        <li><a href="{{url_for("farmer_pending_request")}}">My Requests</a></li>
+        <li><a href="{{url_for("farmer_request")}}">Request</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="{{url_for("home")}}">logout</a></li>
+      </ul>
+      <!--<ul>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">Register</a></li>
+      </ul>-->
+    </div>
+    <div class="form">
+      <form  method = "post" onsubmit="return mySubmitFunction(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" >
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" >
+        
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" >
+        
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" ></textarea>
+        
+        <label for="Farmer_ID">Farmer ID:</label>
+        <textarea id="Farmer_ID" name="Farmer_ID" ></textarea>
+        <button onclick="postData">Submit</button>
+
+        <!--<input type="submit" value="Submit Request">-->
+        <!--<a href="{{url_for("redirect_page")}}"><input type="submit" value="submit"></a>-->
+
+      </form>
+
+    </div>
+
+
+
+    <script>
+      function mySubmitFunction()
+      {
+        someBug()
+        return false;
+      }
+      function postData(e) {
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const address = document.getElementById("address").value;
+        const Farmer_ID = document.getElementById("Farmer_ID").value;
+        
+        const data = { name, email, phone, address, Farmer_ID };
+        
+        fetch('/post-data-url', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => {
+          // Redirect to the other HTML page using Flask's redirect function
+          window.location.href = '{{ url_for("home") }}';
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      }
+      
+    </script>
+    
+
+
+  </body>
+</html>
