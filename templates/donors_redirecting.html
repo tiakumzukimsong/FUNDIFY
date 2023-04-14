@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redirecting to Home page...</title>
+  </head>
+  <body>
+    <script>
+      // Redirect to the home page after 5 seconds
+      setTimeout(function() {
+        window.location.href = "{{ url_for('donors_welcome') }}";
+      }, 3000);
+    </script>
+    <p>Redirecting ...</p>
+  </body>
+</html>

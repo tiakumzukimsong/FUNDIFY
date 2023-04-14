@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>NGO's Login Page</title>
+	<title>Donor's Login Page</title>
 	<style>
 		.login-form {
 			margin: 0 auto;
@@ -53,7 +53,7 @@
 <body></head>
 <body>
 	<div class="login-form">
-		<h1>Education's Login</h1>
+		<h1>Donor's Login</h1>
 		
 		<form name="loginForm" onsubmit="return validateForm()" method="post">
 			<label for="email">Email:</label>
@@ -64,11 +64,13 @@
 				<p><a href="{{url_for("farmers_signup")}}"><button class=grey style="height:50px;width:100px">submit</button></a></p>
 		
 			-->
-			<a href="{{url_for("children_signin_submit")}}"><input type="submit" value="Login"></a>
+			<a href="{{url_for("donors_welcome")}}"><input type="submit" value="Login"></a>
 
 		</form>
 			
-		<p>Don't have account? <a href="{{url_for("children_signup")}}">Sign up here.</a></p>
+		<p>Don't have account? <a href="{{url_for("donors_signup")}}">Sign up here.</a></p>
+        <p>Don't want to login? <a href="{{url_for("donors_welcome")}}">Login here.</a></p>
+
 	</div>
 	<script >
 		function validateForm() {

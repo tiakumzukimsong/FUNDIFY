@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Donor's Signup Page</title>
+<style>
+	
+	.signup-form {
+		margin: 0 auto;
+
+			padding: 20px;
+			background-color: #f2f2f2;
+			border-radius: 5px;
+            
+            width: 500px;
+            
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+	}
+	
+	h1 {
+		text-align: center;
+	}
+	
+	label {
+		display: block;
+		margin-bottom: 5px;
+		font-weight: bold;
+	}
+	
+	input[type="email"], input[type="password"] , input[type="user_name"] {
+		display: block;
+		margin-bottom: 20px;
+		padding: 10px;
+		border-radius: 5px;
+		border: none;
+		width: 100%;
+	}
+	
+	input[type="submit"] {
+		background-color: #4CAF50;
+		color: white;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	
+	input[type="submit"]:hover {
+		background-color: #3e8e41;
+	}
+	
+	#error-message {
+		color: red;
+		margin-top: 10px;
+		font-weight: bold;
+	}
+	
+</style>
+</head>
+<body>
+	<div class="signup-form">
+		<h1>Donor's Signup</h1>
+		<form name="signupForm" onsubmit="return validateForm()" method="post">
+			<label for="user_name">User Name:</label>
+			<input type="user_name" id="user_name" name="user_name" ><br><br>
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" ><br><br>
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" ><br>
+			<label for="confirm-password">Confirm Password:</label>
+			<input type="password" id="confirm-password" name="confirm-password" ><br><br>
+			<!-- <input type="submit" value="Sign Up">-->
+			<input type="submit" value="submit">
+
+		</form>
+
+		<p>Already have an account? <a href="{{url_for("donors_login")}}">Login here.</a></p>
+		<p>Don't want to login? <a href="{{url_for("donors_welcome")}}">Click here.</a></p>
+
+    </div>
+	<script>
+		function validateForm() {
+			var email = document.forms["signupForm"]["email"].value;
+			var password = document.forms["signupForm"]["password"].value;
+			var confirmPassword = document.forms["signupForm"]["confirm-password"].value;
+
+			if (email == "") {
+				alert("Email must be filled out");
+				return false;
+			}
+		
+			if (password == "") {
+				alert("Password must be filled out");
+				return false;
+			}
+			if (confirmPassword == "") {
+				alert("confirmPassword must be filled out");
+				return false;
+			}
+		}
+
+		function checkPassword() {
+			var password = document.forms["signupForm"]["password"].value;
+			var confirmPassword = document.forms["signupForm"]["confirm-password"].value;
+			
+			if (password != confirmPassword) {
+			  alert("Passwords do not match.");
+			  return false;
+			}
+			
+			return true;
+		  }
+		  
+		
+		  
+	</script>
+</body>
+</html>

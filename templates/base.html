@@ -2,6 +2,8 @@
     <head>
 <!--        <link rel="stylesheet" href={{url_for("static",filename="/static/base.css")}}> -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/my-style.css') }}">
+
         <style>
           /* For mobile phones: */
           [class*="col-"] {
@@ -69,6 +71,243 @@
               width: 80%;
               
             }
+
+            * {
+              margin: 0;
+              padding: 0;
+            }
+        
+            /* For mobile phones: */
+            [class*="col-"] {
+              width: 100%;
+            }
+        
+            @media only screen and (min-width: 768px) {
+        
+              /* For desktop: */
+              .col-1 {
+                width: 8.33%;
+              }
+        
+              .col-2 {
+                width: 16.66%;
+              }
+        
+              .col-3 {
+                width: 25%;
+              }
+        
+              .col-4 {
+                width: 33.33%;
+              }
+        
+              .col-5 {
+                width: 41.66%;
+              }
+        
+              .col-6 {
+                width: 50%;
+              }
+        
+              .col-7 {
+                width: 58.33%;
+              }
+        
+              .col-8 {
+                width: 66.66%;
+              }
+        
+              .col-9 {
+                width: 75%;
+              }
+        
+              .col-10 {
+                width: 83.33%;
+              }
+        
+              .col-11 {
+                width: 91.66%;
+              }
+        
+              .col-12 {
+                width: 100%;
+              }
+            }
+        
+        
+            /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 940px) {
+              .text {
+                font-size: 11px
+              }
+            }
+            
+        
+            /* CSS Variables */
+        
+            :root{
+              --navbar-height: 59px;
+            }
+        
+          
+            /* navbar-logo and image */
+            #logo{
+              margin: 10px 23px;
+            }
+            #logo img{
+              height: 60px;
+              margin:  3px 6px;
+            }
+        /* navbar-list styling */
+          
+        /* Home section */
+            #home{
+               display: flex;
+               flex-direction: column;
+               padding:3px 200px ;
+               justify-content: center;
+               align-items: center;
+               height: 400px;
+            }
+            #home::before{
+              content: "";
+              position: absolute;
+
+              background: url({{ url_for('static', filename='bg.jpeg') }}) no-repeat center center/cover;
+              height: 600px;
+              width: 100%;
+              z-index: -1;
+              opacity: 0.89;
+            }
+            #home h1{
+              color: white;
+              text-align: center;
+              font-family: 'Bree Serif', serif;
+            }
+            #home p{
+              color: rgb(255, 255, 255) ;
+              text-align: center;
+              font-size: 1.3rem;
+              font-family: 'Bree Serif', serif;
+            }
+        
+            
+            /* Services section */
+        
+            #services{
+              margin: 34px;
+              display: flex;
+            }
+        
+            #services .box{
+              border: 2px solid brown;
+              padding: 34px;
+              margin: 3px 50px;
+              border-radius: 28px;
+              background: #f2f2f2;
+            }
+        
+            #services .box img{
+              margin: auto;
+              display: block;
+              border: 2px solid brown;
+              height: 100px;
+            }
+        
+            #services .box p{
+              font-family: 'Bree Serif', serif;
+            }
+        
+            /* Clients-section */
+        
+            #client-section{
+              height: 344px;
+        
+            }
+            #client-section ::before{
+              content: "";
+              position: absolute;
+              background: url(ngo.jpeg);
+              width: 100%;
+              height: 100%;
+              z-index: -1;
+              opacity: 0.4;
+        
+            }
+            #clients{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            .client_item{
+              padding: 56px;
+            }
+            #clients img{
+              height: 124px;
+            }
+        
+            /* Contact section */
+        
+            #contact{
+              position: relative;
+            }
+            #contact::before{
+              content: "";
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              z-index: -1;
+              opacity: 0.7;
+              background: url(contact.jpg) no-repeat center center/cover;
+        
+            }
+            #contact-box{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding-bottom: 34px; 
+            }
+            #contact-box input,
+            #contact-box textarea{
+              width: 100%;
+              padding: 0.5rem;
+              border-radius: 9px;
+              font-size: 1.1rem;
+            }
+            #contact-box form{
+              width: 48%;
+            }
+            #contact-box label{
+              font-size: 1.3rem;
+              font-family: 'Bree Serif', serif;
+            }
+            
+        
+            footer{
+              background-color: black;
+              color: white;
+              padding: 9px 20px;
+            }
+            /* Utility Classes */
+        
+            .h-primary{
+                font-size: 3.8rem;
+                padding: 12px;
+                font-family: 'Bree Serif', serif;
+            }
+            .h-secondary{
+                font-size: 2.8rem;
+                padding: 12px;
+                font-size: 2.3rem;
+            }
+            .center{
+              text-align: center;
+            }
+            .black-text {
+              color: black;
+            }
+            
+        
         </style>
         <title>
             {%block title%}{%endblock%}
@@ -77,7 +316,7 @@
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Fundify</a>
+            <a class="navbar-brand" href="{{url_for("home")}}">Fundify</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -86,7 +325,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="{{url_for("home")}}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
                 <!--
@@ -103,77 +342,90 @@
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{url_for("farmers")}}">Farmers</a>
                     <a class="dropdown-item" href="{{url_for("children_login")}}">Education</a>
+                    <a class="dropdown-item" href="{{url_for("donors_login")}}">Donors</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{url_for("admin")}}">Admin</a>
+                    <a class="dropdown-item" href="{{url_for("admin_login")}}">Admin</a>
                   </div>
                 </li>
 
 
-                <!-- <li class="nav-item">
-                  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li> -->
               
               
               </ul>
               
-              <!--
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
-              -->
+              
               
             </div>
           </nav>
 
           <br><br>
-          <div class = "content">
-              <div class = "aboutus">
-                
-                  <u class="aboutus-head">About us</u>
-                
-              </div>
-              <div class="introduction">
-              <p >
-                  The system "FUNDIFY" is majorly concerned with transparency fund records and securely transferring of funds to the right user. It will include farmer and NGO verification through government authorised proofs. Right now, there are so many charity frauds occurring throughout the world but there is no senior government or private sector to eradicate the cause. So here, we are Fundify to help the needy ones from these scams and scandals happening all over the world and provide them their right funds safe and secure.
-              </p>
-            </div>
+         
 
-              <p class="motivation-head">
-                <h2><u>Motivation</u></h2>
-              </p>
-              <p class="motivation">Red tape and corruption have become a great evil in India which is present everywhere. One way or the other, corruption occurs in almost every field like Education, Companies, Donations, etc.  
-                  We aim to create a site for raising funds for the Children's Education and the Farmers which will be transparent to the Donors on where the funds are being utilized. It would not only increase the trust of the donor’s in the site but would rather encourage them to be more enthusiastic towards lending more donations which would help eradicate societal causes like poverty, education, etc. </p>
-              
-              
-              <br>
-              <h2><u class="aim-head">AIM</u></h2>
-              <p class="aim">
-                  Our main aim is to help out the childrens with their education and their welfare and to help out the farmers of India who are in need of financial help.
-                  We will have links with NGO who will be responsible to take care of the children's education and their wellbeing.
-                  And the Donors will be able to track how the funds are being utilised.
-                  
-                  <br>
-                  For example :- Names of the student, which school are they studying in, Name and picture of the farmers, etc
-                  
-              </p>
-
-              <br>
-              <h2><u>How To Do</u></h2>
-              <p class="HowToDo">
-                  The NGO who are not listed in our database
-                  can send request for the funds by providing us certain credentials. 
-                  <br>
-                  After the funds have been released, the NGOs have to provide with the details of the child and The farmers have to provide the certificates and the field pictures with them
-              
-              </p>
-
-            </div>
         
-
-
-          {%block content%}
-          {%endblock%}
+        
+        </nav>
+      
+        <section id="home">
+          <h1 class="h-primary">Welcome to Fundify</h1>
+          <b>
+          <p class="Content-p" style="filter: grayscale(100%)">The system "FUNDIFY" is majorly concerned with transparency fund records and securely transferring of funds to the right user. 
+            It will include farmer and NGO verification through government authorised proofs. Right now, there are so many charity frauds occurring throughout the world
+            but there is no senior government or private sector to eradicate the cause.
+            So here, we are Fundify to help the needy ones from these scams and scandals
+            happening all over the world and provide them their right funds safe and secure.</p></b>
+            
+              
+        </section>
+        <section class="services-container">
+          <br><br><br><br><br>
+          <h1 class="h-primary center" style="font-size: 4vw">Our Services</h1>
+          <div id="services">
+            <div class="box">
+              <img src="{{ url_for('static', filename='summary.png') }}" alt="">
+              <h2 class="h-secondary center">Summary</h2>
+              <p class="center">Our System provides the donors with a summary of all the donations and provide an ability to track the changes it had provided to the society.</p>
+            </div>
+            <div class="box">
+              <img src="{{ url_for('static', filename='child.gif') }}" alt="">
+              <h2 class="h-secondary center">Educate a child</h2>
+              <p class="center">Now you can educate a child through donating directly to the NGO's without any third party interference. Child sponsorship is crucial for upcoming generation in order to facilitate the world with greater insights, which requires your attention.</p>
+            </div>
+            <div class="box">
+              <img src="{{ url_for('static', filename='farmer.gif') }}" alt="">
+              <h2 class="h-secondary center">Help a Farmer</h2>
+              <p class="center">Farmers are the building blocks of any economy and their needs and requirements must be heard significantly. For this, help a farmer and equip him with all the necessary wants.</p>
+            </div>
+          </div>
+        </section>
+        
+        <section id="client_section">
+          <h1 class="h-primary center">Our Clients</h1>
+          <div id="clients">
+            <div class="client_item">
+              <img src="{{ url_for('static', filename='udaan.png') }}" alt="">
+            </div>
+            <div class="client_item">
+              <img src="{{ url_for('static', filename='nanhi.jpg') }}" alt="">
+            </div>
+            <div class="client_item">
+              <img src="{{ url_for('static', filename='arun.jpeg') }}" alt="">
+            </div>
+          </div>
+        </section>
+        
+        <section id="contact">
+          <h1 class="h-primary center">Contact Us</h1>
+          <div id="contact-box">
+        
+          </div>
+        </section>
+        
+      
+        <footer>
+          <div class="center">
+            Copyright &copy; www.fundify.com. All rights reserved.
+          </div>
+        </footer>
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
