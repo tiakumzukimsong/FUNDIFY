@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <a href="{{url_for(("home"))}}"><img src="FUNDIFY2.jpg" class = "logo"></a>
-
 	<title>Customer Signup Page</title>
 <style>
- 
+	
 	.signup-form {
 		margin: 0 auto;
 
-        padding: 20px;
-        background-color: #f2f2f2;
-        border-radius: 5px;
-        
-        width: 500px;
-        
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        
+			padding: 20px;
+			background-color: #f2f2f2;
+			border-radius: 5px;
+            
+            width: 500px;
+            
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
 	}
 	
 	h1 {
@@ -32,7 +29,7 @@
 		font-weight: bold;
 	}
 	
-	input[type="email"], input[type="password"] {
+	input[type="email"], input[type="password"] , input[type="user_name"] {
 		display: block;
 		margin-bottom: 20px;
 		padding: 10px;
@@ -61,59 +58,61 @@
 	}
 	
 </style>
-
 </head>
 <body>
 	<div class="signup-form">
 		<h1>Customer Signup</h1>
 		<form name="signupForm" onsubmit="return validateForm()" method="post">
+			<label for="user_name">User Name:</label>
+			<input type="user_name" id="user_name" name="user_name" ><br><br>
 			<label for="email">Email:</label>
 			<input type="email" id="email" name="email" ><br><br>
 			<label for="password">Password:</label>
 			<input type="password" id="password" name="password" ><br>
-			<!--<span id="password-requirements">Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number.</span><br><br>-->
 			<label for="confirm-password">Confirm Password:</label>
 			<input type="password" id="confirm-password" name="confirm-password" ><br><br>
-			<!--<input type="submit" value="Sign Up">-->
+			<!-- <input type="submit" value="Sign Up">-->
+			<input type="submit" value="submit">
+
 		</form>
-		<a href="{{url_for("children_login")}}"><input type="submit" value="Login"></a>
 
 		<p>Already a customer? <a href="{{url_for("children_login")}}">Login here.</a></p>
 	</div>
 	<script>
 		function validateForm() {
-			var email = document.getElementByid["signupForm"]["email"].value;
-			var password = document.getElementByid["signupForm"]["password"].value;
-			var confirmPassword = document.getElementByid["signupForm"]["confirm-password"].value;
-		
-			if (!isValidEmail(email)) {
-				alert("Please enter a valid email address");
+			var email = document.forms["signupForm"]["email"].value;
+			var password = document.forms["signupForm"]["password"].value;
+			var confirmPassword = document.forms["signupForm"]["confirm-password"].value;
+
+			if (email == "") {
+				alert("Email must be filled out");
 				return false;
 			}
 		
-			if (!isValidPassword(password)) {
-				alert("Please enter a password that meets the following requirements:\n- At least 8 characters long\n- Contains at least one uppercase letter, one lowercase letter, and one number");
+			if (password == "") {
+				alert("Password must be filled out");
 				return false;
 			}
-		
+			if (confirmPassword == "") {
+				alert("confirmPassword must be filled out");
+				return false;
+			}
+		}
+
+		function checkPassword() {
+			var password = document.forms["signupForm"]["password"].value;
+			var confirmPassword = document.forms["signupForm"]["confirm-password"].value;
+			
 			if (password != confirmPassword) {
-				alert("Passwords do not match");
-				return false;
+			  alert("Passwords do not match.");
+			  return false;
 			}
-		}
+			
+			return true;
+		  }
+		  
 		
-		function isValidEmail(email) {
-			var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-			return emailPattern.test(email);
-		}
-		
-		function isValidPassword(password) {
-			var lengthPattern = /.{8,}/;
-			var uppercasePattern = /[A-Z]/;
-			var lowercasePattern = /[a-z]/;
-			var numberPattern = /\d/;
-			return lengthPattern.test(password) &&
-		
+		  
 	</script>
 </body>
 </html>
