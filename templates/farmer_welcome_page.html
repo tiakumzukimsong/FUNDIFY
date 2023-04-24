@@ -2,192 +2,127 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Admin Dashboard</title>
-  <style>
-    /* Reset styles */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-size: 100%;
-  vertical-align: baseline;
-  background: transparent;
-}
-
-/* Global styles */
-body {
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #333;
-  background-color: #f5f5f5;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.header {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #333;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.navbar ul {
-  list-style: none;
-  display: flex;
-}
-
-.navbar li {
-  margin-right: 10px;
-}
-
-.navbar a {
-  display: block;
-  padding: 10px;
-  color: #333;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-.navbar a:hover {
-  background-color: #333;
-  color: #fff;
-}
-
-.content {
-  margin-top: 20px;
-  display: flex;
-}
-
-.sidebar {
-  flex-basis: 20%;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-}
-
-.sidebar h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.sidebar ul {
-  list-style: none;
-  margin-bottom: 20px;
-}
-
-.sidebar li {
-  margin-bottom: 10px;
-}
-
-.sidebar a {
-  color: #333;
-  text-decoration: none;
-}
-
-.sidebar a:hover {
-  color: #007bff;
-}
-
-.main {
-  flex-basis: 80%;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-}
-
-.main h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.main p {
-  margin-bottom: 20px;
-}
-
-.main table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-.main th {
-  text-align: left;
-  background-color: #f5f5f5;
-  padding: 10px;
-}
-
-.main td {
-  padding: 10px;
-  border-bottom:
-
-  </style>  
-</head>
-<body>
-  <nav class="navbar">
-    <div class="navbar-brand">
-      <!--iosnv-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Farmers Donation Page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style>
+		.jumbotron {
+			background-color: #f8f8f8;
+			padding-top: 120px;
+			padding-bottom: 120px;
+		}
+		.container-fluid {
+			padding: 60px 50px;
+		}
+		.btn {
+			padding: 10px 20px;
+			font-size: 18px;
+			margin-top: 30px;
+		}
+		.donate-image {
+			margin-top: 30px;
+			margin-bottom: 30px;
+			max-width: 100%;
+			height: auto;
+		}
+		.feature {
+			text-align: center;
+			margin-bottom: 50px;
+		}
+		.feature h3 {
+			font-size: 24px;
+			font-weight: 600;
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+		.feature p {
+			font-size: 18px;
+			margin-bottom: 20px;
+		}
+		.feature img {
+			max-width: 100%;
+			height: auto;
+			margin-bottom: 20px;
+		}
+	</style>
+  
+  <body>
+  
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <h1>
+          <a class="navbar-brand" href="{{url_for("farmer_signin_submit")}}">Farmers </a>
+          </h1>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+                          <a href="{{url_for("farmer_signin_submit")}}">Home</a>
+                        </li>
+                
+                        <li class="nav-item">
+                          <a href="{{url_for("farmer_pending_request")}}">My Requests</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{{url_for("farmer_request")}}">Request</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{{url_for("home")}}">logout</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{{url_for("index_farmer")}}">Upload</a>
+                        </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <div class="jumbotron">
+      <div class="container text-center">
+        <h1>Support Farmers in Need</h1>
+        <p>Make a difference by donating to our cause today</p>
+        <a href="#" class="btn btn-default btn-lg">Donate Now</a>
+      </div>
     </div>
-    <div class="navbar-menu">
-      <ul class="navbar-nav">
-
-        
-        <li class="nav-item">
-          <a href="{{url_for("farmer_signin_submit")}}">Home</a>
-        </li>
-
-        <li class="nav-item">
-          <a href="{{url_for("farmer_pending_request")}}">My Requests</a>
-        </li>
-        <li class="nav-item">
-          <a href="{{url_for("farmer_request")}}">Request</a>
-        </li>
-        <li class="nav-item">
-          <a href="{{url_for("home")}}">logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <hr>
-   
-      <!--<ul>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Register</a></li>
-      </ul>-->
-    </div>
-    <div class="container">
-      <h2>About Us</h2>
-      <p>We are a team of passionate individuals who love creating awesome websites. Our goal is to provide you with the best user experience possible. Whether you are a business owner, a blogger, or an individual looking to create a personal website, we are here to help you.</p>
-      <p>Feel free to browse our portfolio and see some of the amazing websites we have created for our clients. If you have any questions, don't hesitate to contact us.</p>
-      <a href="#" class="button">Get in Touch</a>
-    </div>
-  </body>
-</html>
+  
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8">
+          <h2>About Our Cause</h2>
+                  <p>eleifend nisi ex quis ipsum. Sed vel orci ut sapien faucibus malesuada. Nulla luctus orci sed commodo dictum. Duis tincidunt orci ipsum, ut sollicitudin velit suscipit eget. Nam ut elit nec justo suscipit sodales vel a felis. Nullam sit amet ex velit. Proin euismod libero quis augue bibendum, vel dignissim sapien commodo. Nunc commodo, lectus id rhoncus consectetur, quam dolor sollicitudin lacus, sit amet convallis risus turpis vel ex. Quisque mollis orci ac rutrum commodo. Pellentesque bibendum imperdiet dolor, id consectetur ipsum vestibulum eu. Duis at eleifend odio. Fusce vestibulum commodo turpis ac molestie. Sed hendrerit efficitur velit, eu accumsan odio.</p>
+                  <h2>Our Mission</h2>
+                  <p>Nulla facilisi. Sed tincidunt erat at ante scelerisque bibendum. Praesent ornare ac tortor sed placerat. Etiam dignissim magna vel risus venenatis, vitae aliquam dolor suscipit. Sed dapibus, ipsum sit amet consectetur maximus, nisl lectus bibendum magna, non bibendum turpis ante nec libero. Sed rhoncus odio eu dolor faucibus malesuada. Duis vel nisi purus. Aliquam eu orci auctor, placerat enim at, euismod massa. Donec blandit erat a lacinia eleifend.</p>
+      
+                 
+              </div>
+              <div class="col-sm-4">
+                  <img src="https://dummyimage.com/600x400/000/fff" class="donate-image" alt="Donate Image">
+                  <div class="feature">
+                      <img src="https://dummyimage.com/300x200/000/fff" alt="Feature Image">
+                      <h3>Help Farmers in Need</h3>
+                      <p>By donating to our cause, you can help farmers facing challenges such as natural disasters, crop failures, and financial difficulties.</p>
+                  </div>
+                  <div class="feature">
+                      <img src="https://dummyimage.com/300x200/000/fff" alt="Feature Image">
+                      <h3>Make a Difference</h3>
+                      <p>Your donation, no matter how small, can make a significant impact in the lives of those we aim to help.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <footer class="container-fluid text-center">
+          <p>Copyright © 2023 
+              <a href="#">Farmers Donation Page</a>
+          </p>
+      </footer>
+      

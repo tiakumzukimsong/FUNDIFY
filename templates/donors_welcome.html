@@ -1,12 +1,198 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Welcome</title>
-  <style>
-    /* Reset styles */
+<html>
+    <head>
+<!--        <link rel="stylesheet" href={{url_for("static",filename="/static/base.css")}}> -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/my-style.css') }}">
+
+        <style>
+          /* For mobile phones: */
+          [class*="col-"] {
+              width: 100%;
+            }
+            
+            @media only screen and (min-width: 768px) {
+              /* For desktop: */
+              .col-1 {width: 8.33%;}
+              .col-2 {width: 16.66%;}
+              .col-3 {width: 25%;}
+              .col-4 {width: 33.33%;}
+              .col-5 {width: 41.66%;}
+              .col-6 {width: 50%;}
+              .col-7 {width: 58.33%;}
+              .col-8 {width: 66.66%;}
+              .col-9 {width: 75%;}
+              .col-10 {width: 83.33%;}
+              .col-11 {width: 91.66%;}
+              .col-12 {width: 100%;}
+            }
+
+
+            /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 300px) {
+              .text {font-size: 11px}
+            }
+            
+                      
+
+
+            .aboutus-head{
+
+            }
+            .aboutus{
+              font-size: 25px;
+              
+            }
+            .introduction{
+              
+              font-size: 18px;
+            }
+
+            .motivation{
+              
+              font-size: 18px;
+            }
+
+            .aim{
+              
+              font-size: 18px;
+            }
+
+            .HowToDo{
+              
+              font-size: 18px;
+            }
+
+
+            .content{
+              background-position-x: center;
+              display: block;
+              margin-left: auto;
+              margin-right: auto;
+              width: 80%;
+              
+            }
+
+            * {
+              margin: 0;
+              padding: 0;
+            }
+        
+            /* For mobile phones: */
+            [class*="col-"] {
+              width: 100%;
+            }
+        
+            @media only screen and (min-width: 768px) {
+        
+              /* For desktop: */
+              .col-1 {
+                width: 8.33%;
+              }
+        
+              .col-2 {
+                width: 16.66%;
+              }
+        
+              .col-3 {
+                width: 25%;
+              }
+        
+              .col-4 {
+                width: 33.33%;
+              }
+        
+              .col-5 {
+                width: 41.66%;
+              }
+        
+              .col-6 {
+                width: 50%;
+              }
+        
+              .col-7 {
+                width: 58.33%;
+              }
+        
+              .col-8 {
+                width: 66.66%;
+              }
+        
+              .col-9 {
+                width: 75%;
+              }
+        
+              .col-10 {
+                width: 83.33%;
+              }
+        
+              .col-11 {
+                width: 91.66%;
+              }
+        
+              .col-12 {
+                width: 100%;
+              }
+            }
+        
+        
+            /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 940px) {
+              .text {
+                font-size: 11px
+              }
+            }
+            
+        
+            /* CSS Variables */
+        
+            :root{
+              --navbar-height: 59px;
+            }
+        
+          
+            /* navbar-logo and image */
+            #logo{
+              margin: 10px 23px;
+            }
+            #logo img{
+              height: 60px;
+              margin:  3px 6px;
+            }
+        /* navbar-list styling */
+          
+        /* Home section */
+            #home{
+               display: flex;
+               flex-direction: column;
+               padding:3px 200px ;
+               justify-content: center;
+               align-items: center;
+               height: 400px;
+            }
+            #home::before{
+              content: "";
+              position: absolute;
+
+              background: url({{ url_for('static', filename='bg.jpeg') }}) no-repeat center center/cover;
+              height: 600px;
+              width: 100%;
+              z-index: -1;
+              opacity: 0.89;
+            }
+            #home h1{
+              color: white;
+              text-align: center;
+              font-family: 'Bree Serif', serif;
+            }
+            #home p{
+              color: rgb(255, 255, 255) ;
+              text-align: center;
+              font-size: 1.3rem;
+              font-family: 'Bree Serif', serif;
+            }
+
+
+             /* Reset styles */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -148,48 +334,260 @@ body {
 .main td {
   padding: 10px;
   border-bottom:
+        
+            
+            /* Services section */
+        
+            #services{
+              margin: 34px;
+              display: flex;
+            }
+        
+            #services .box{
+              border: 2px solid brown;
+              padding: 34px;
+              margin: 3px 50px;
+              border-radius: 28px;
+              background: #f2f2f2;
+            }
+        
+            #services .box img{
+              margin: auto;
+              display: block;
+              border: 2px solid brown;
+              height: 100px;
+            }
+        
+            #services .box p{
+              font-family: 'Bree Serif', serif;
+            }
+        
+            /* Clients-section */
+        
+            #client-section{
+              height: 344px;
+        
+            }
+            #client-section ::before{
+              content: "";
+              position: absolute;
+              background: url(ngo.jpeg);
+              width: 100%;
+              height: 100%;
+              z-index: -1;
+              opacity: 0.4;
+        
+            }
+            #clients{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            .client_item{
+              padding: 56px;
+            }
+            #clients img{
+              height: 124px;
+            }
+        
+            /* Contact section */
+        
+            #contact{
+              position: relative;
+            }
+            #contact::before{
+              content: "";
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              z-index: -1;
+              opacity: 0.7;
+              background: url(contact.jpg) no-repeat center center/cover;
+        
+            }
+            #contact-box{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding-bottom: 34px; 
+            }
+            #contact-box input,
+            #contact-box textarea{
+              width: 100%;
+              padding: 0.5rem;
+              border-radius: 9px;
+              font-size: 1.1rem;
+            }
+            #contact-box form{
+              width: 48%;
+            }
+            #contact-box label{
+              font-size: 1.3rem;
+              font-family: 'Bree Serif', serif;
+            }
+            
+        
+            footer{
+              background-color: black;
+              color: white;
+              padding: 9px 20px;
+            }
+            /* Utility Classes */
+        
+            .h-primary{
+                font-size: 3.8rem;
+                padding: 12px;
+                font-family: 'Bree Serif', serif;
+            }
+            .h-secondary{
+                font-size: 2.8rem;
+                padding: 12px;
+                font-size: 2.3rem;
+            }
+            .center{
+              text-align: center;
+            }
+            .black-text {
+              color: black;
+            }
+            
+        
+        </style>
+        <title>
+            {%block title%}{%endblock%}
+        </title>
+    </head>
 
-  </style>  
-</head>
-<body>
-  <nav class="navbar">
-    <div class="navbar-brand">
-<!----> 
-    </div>
-    <div class="navbar-menu">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-        <a href="{{url_for("donors_welcome")}}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="{{url_for("donors_mydonation")}}">My Donation</a>
-        </li>
-        <li class="nav-item">
-          <a href="{{url_for("donors_donate")}}">Donate</a>
-        </li>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{url_for("home")}}">Fundify</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
 
-        <li class="nav-item">
-            <a href="{{url_for("donors_track")}}">Track Donation</a>
-          </li>
-        <li class="nav-item">
-          <a href="{{url_for("home")}}">logout</a>
+          
+
+                <!--
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
                 </li>
-      </ul>
-    </div>
-  </nav>
-  <hr>
-   
-      <!--<ul>
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Register</a></li>
-      </ul>-->
-    </div>
-    <div class="container">
-      <h2>About Us</h2>
-      <p>We are a team of passionate individuals who love creating awesome websites. Our goal is to provide you with the best user experience possible. Whether you are a business owner, a blogger, or an individual looking to create a personal website, we are here to help you.</p>
-      <p>Feel free to browse our portfolio and see some of the amazing websites we have created for our clients. If you have any questions, don't hesitate to contact us.</p>
-      <a href="#" class="button">Get in Touch</a>
-    </div>
-  </body>
-</html>
+                 -->
 
+
+                 <nav class="navbar">
+                    <div class="navbar-brand">
+                <!----> 
+                    </div>
+                    <div class="navbar-menu">
+                      <ul class="navbar-nav">
+                        <li class="nav-item">
+                        <a href="{{url_for("donors_welcome")}}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{{url_for("donors_mydonation")}}">My Donation</a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="{{url_for("donors_donate")}}">Donate</a>
+                        </li>
+                
+                        <li class="nav-item">
+                            <a href="{{url_for("donors_track")}}">Track Donation</a>
+                          </li>
+                        <li class="nav-item">
+                          <a href="{{url_for("home")}}">logout</a>
+                                </li>
+                      </ul>
+                    </div>
+                  </nav>
+
+
+              
+              
+              </ul>
+              
+              
+              
+            </div>
+          </nav>
+
+          <br><br>
+         
+
+        
+        
+        </nav>
+      
+        <section id="home">
+          <h1 class="h-primary">Welcome to Fundify</h1>
+          <b>
+          <p class="Content-p" style="filter: grayscale(100%)">The system "FUNDIFY" is majorly concerned with transparency fund records and securely transferring of funds to the right user. 
+            It will include farmer and NGO verification through government authorised proofs. Right now, there are so many charity frauds occurring throughout the world
+            but there is no senior government or private sector to eradicate the cause.
+            So here, we are Fundify to help the needy ones from these scams and scandals
+            happening all over the world and provide them their right funds safe and secure.</p></b>
+            
+              
+        </section>
+        <section class="services-container">
+          <br><br><br><br><br>
+          <h1 class="h-primary center" style="font-size: 4vw">Our Services</h1>
+          <div id="services">
+            <div class="box">
+              <img src="{{ url_for('static', filename='summary.png') }}" alt="">
+              <h2 class="h-secondary center">Summary</h2>
+              <p class="center">Our System provides the donors with a summary of all the donations and provide an ability to track the changes it had provided to the society.</p>
+            </div>
+            <div class="box">
+              <img src="{{ url_for('static', filename='child.gif') }}" alt="">
+              <h2 class="h-secondary center">Educate a child</h2>
+              <p class="center">Now you can educate a child through donating directly to the NGO's without any third party interference. Child sponsorship is crucial for upcoming generation in order to facilitate the world with greater insights, which requires your attention.</p>
+            </div>
+            <div class="box">
+              <img src="{{ url_for('static', filename='farmer.gif') }}" alt="">
+              <h2 class="h-secondary center">Help a Farmer</h2>
+              <p class="center">Farmers are the building blocks of any economy and their needs and requirements must be heard significantly. For this, help a farmer and equip him with all the necessary wants.</p>
+            </div>
+          </div>
+        </section>
+        
+        <section id="client_section">
+          <h1 class="h-primary center">Our Clients</h1>
+          <div id="clients">
+            <div class="client_item">
+              <img src="{{ url_for('static', filename='udaan.png') }}" alt="">
+            </div>
+            <div class="client_item">
+              <img src="{{ url_for('static', filename='nanhi.jpg') }}" alt="">
+            </div>
+            <div class="client_item">
+              <img src="{{ url_for('static', filename='arun.jpeg') }}" alt="">
+            </div>
+          </div>
+        </section>
+        
+        <section id="contact">
+          <h1 class="h-primary center">Contact Us</h1>
+          <div id="contact-box">
+        
+          </div>
+        </section>
+        
+      
+        <footer>
+          <div class="center">
+            Copyright &copy; www.fundify.com. All rights reserved.
+          </div>
+        </footer>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
+        {%block context%}{%endblock%}
+    </body>
+
+
+
+
+</html>

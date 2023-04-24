@@ -78,52 +78,68 @@
     <br>
    
     <div class="col-sm-9">
-        <div class="well">
-          <h4>Farmer Requests</h4>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Farmer ID</th>
-                <th>Status</th>
-                <th>Age</th>
-                <th>Requested Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for row in details %}
-              <tr>
-                <td>{{ row[0] }}</td>
-                <td>{{ row[1] }}</td>
-                <td>{{ row[2] }}</td>
-                <td>{{ row[3] }}</td>
-                <td>{{ row[4] }}</td>
-                <td>{{ row[5] }}</td>
-                <td>{{ row[6] }}</td>
-                <td>{{ row[7] }}</td>
+      <div class="well">
+        <h4>Farmer Requests</h4>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th>Farmer ID</th>
+              <th>Status</th>
+              <th>Age</th>
+              <th>Requested Amount</th>
+              <th>Action</th>
 
-                <td>
-                  <form method="POST" action="{{ url_for('update_farmer_status', SL_No=row[0]) }}">
-                    <select name="status">
-                      <option value="Pending" {% if row[5] == 'Pending' %} selected {% endif %}>Pending</option>
-                      <option value="Approved" {% if row[5] == 'Approved' %} selected {% endif %}>Approved</option>
-                      <option value="Rejected" {% if row[5] == 'Rejected' %} selected {% endif %}>Rejected</option>
-                    </select>
-                    <input type="number" name="donation_amount" placeholder="Enter amount">
-                    <button type="submit">Update</button>
-                  </form>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in details %}
+            <tr>
+              <td>{{ row[0] }}</td>
+              <td>{{ row[1] }}</td>
+              <td>{{ row[2] }}</td>
+              <td>{{ row[3] }}</td>
+              <td>{{ row[4] }}</td>
+              <td>{{ row[5] }}</td>
+              <td>{{ row[6] }}</td>
+              <td>{{ row[7] }}</td>
+
+              
+            
+            
+            
+
+
+              <td>
+                <form method="POST" action="{{ url_for('update_farmer_status', SL_No=row[0])}}">
+                  <select name="status">
+                    <option value="Pending" {% if row[5] == 'Pending' %} selected {% endif %}>Pending</option>
+                    <option value="Approved" {% if row[5] == 'Approved' %} selected {% endif %}>Approved</option>
+                    <option value="Rejected" {% if row[5] == 'Rejected' %} selected {% endif %}>Rejected</option>
+                  </select>
+                  <input type="hidden" name="name" value="{{ row[0] }}">
+                  <input type="hidden" name="email" value="{{ row[1] }}">
+                  <input type="hidden" name="phone" value="{{ row[2] }}">
+                  <input type="hidden" name="address" value="{{ row[3] }}">
+                  <input type="hidden" name="farmer_id" value="{{ row[4] }}">
+                  <input type="number" name="donation_amount" placeholder="Enter amount">
+                  <button type="submit">Update</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+
           
-        </div>
+            
+          </tbody>
+        </table>
+        
       </div>
-      
+    </div>
+
        
            
          

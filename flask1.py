@@ -1,20 +1,27 @@
-from flask import Flask, render_template, flash,redirect, url_for, request
+from flask import Flask, render_template, flash,redirect, url_for, request,redirect
 from flask_mysqldb import MySQL
 import sqlite3 as sql
 import pymysql
 from bs4 import BeautifulSoup
 import os
 from werkzeug.utils import secure_filename
+import re
+from decimal import Decimal
 
 app = Flask(__name__)
 
 
 current_user = []
 
+UPLOAD_FOLDER = "/home/tia/Desktop/web tech/webpage/flask/static/uploads"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
 def sql_connector():
     conn = pymysql.connect(user="root", password="", db="flask",host="localhost")
     c = conn.cursor()
     return conn,c
+
 
 
 app = Flask(__name__, static_url_path='/static')
@@ -145,6 +152,27 @@ def children_check_user(email, password):
 
 
 #FARMERS
+
+@app.route('/farmer_upload')
+def index_farmer():
+    return render_template("index.html")
+
+
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        # Get the uploaded file
+        file = request.files['image']
+        # Save the file to the uploads folder
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+        return redirect(url_for('uploaded_file', filename=file.filename))
+    return render_template('upload.html')
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return f"<h1>File {filename} uploaded successfully</h1><br><img src='{url_for('static', filename=f'uploads/{filename}')}'/>"
+
 @app.route("/Welcome_farmer")
 def farmer_signin_submit():
     return render_template("farmer_welcome_page.html")
@@ -227,13 +255,21 @@ def farmer_request():
     return render_template("farmer_request.html")
     
 
-@app.route("/farmer_request_sent")
+@app.route("/farmer/request/sent")
 def farmer_request_sent():
     return render_template("farmer_request_sent.html")
 
     
 
+# @app.route("/farmer/priority/request")
+@app.route("/farmer_priorit_request")
+def farmer_priority_request():
+    return render_template("farmer_priority_request.html")
  
+# @app.route("Upload_Image", method = ['POST'])
+# def farmer_image_uploads():
+    
+#     return
 
  
 
@@ -309,6 +345,15 @@ def admin():
     cur.execute("SELECT sum(amount) FROM donors ")
     total_Amount_donated = cur.fetchall()
     
+    cur.execute("select sum(amount) from farmer_donation")
+    farmer_donation = cur.fetchall()
+    
+    cur.execute("select sum(amount) from NGO_donation")
+    ngo_donation = cur.fetchall()
+    
+    cur.execute("select count(*) from donors")
+    donors = cur.fetchall()
+    
     cur.close()
     
     total_Amount_donated=str(total_Amount_donated)
@@ -356,15 +401,40 @@ def admin():
     f_signup_details=int(f_signup_details)
     
     
+    farmer_donation = str(farmer_donation)
+    
+
+    farmer_donation = re.findall(r'\d+', farmer_donation)[0]
+    
+    farmer_donation = int(farmer_donation)
+
+
+    ngo_donation = str(ngo_donation)
+    
+
+    ngo_donation = re.findall(r'\d+', ngo_donation)[0]
+    
+    ngo_donation = int(ngo_donation)
+
+    
     total_users = e_signup_details + f_signup_details
     
     farmer_total_requested_amount = f_sum
+    
     NGO_total_requested_amount = e_sum
 
     total_amount_requested = farmer_total_requested_amount+NGO_total_requested_amount
     
-    return render_template("admin.html",data=f_details,data2 = e_details,data3 = e_signup_details,data4 = f_signup_details,total = total_users,farmer_total = farmer_total_requested_amount,NGO_total = NGO_total_requested_amount,total_amount_requested=total_amount_requested,total_Amount_donated = total_Amount_donated)
+    total_amount_allocated = farmer_donation + ngo_donation
     
+    balance = total_Amount_donated - total_amount_allocated
+    
+    donors = str(donors)
+    
+    donors = donors.replace('(', '').replace(')', '').replace(',', '')
+
+    return render_template("admin.html",data=f_details,data2 = e_details,data3 = e_signup_details,data4 = f_signup_details,total = total_users,farmer_total = farmer_total_requested_amount,NGO_total = NGO_total_requested_amount,total_amount_requested=total_amount_requested,total_Amount_donated = total_Amount_donated,farmer_donation=farmer_donation,ngo_donation=ngo_donation,total_amount_allocated=total_amount_allocated,balance=balance,total_donors = donors)
+    # return donors
     # return total_users
 
 
@@ -407,38 +477,50 @@ def admin_wrong_password_email():
 
 @app.route('/admin_users/farmers')
 def admin_user_farmer():
-    
     cur = mysql.connection.cursor()
-   
-    
-    cur.execute("SELECT Name, Email, Phone, Address, Farmer_ID, Status,Age,amount FROM farmer_details ")
+    cur.execute("SELECT Name, Email, Phone, Address, Farmer_ID, Status, Age, amount FROM farmer_details")
     details = cur.fetchall()
-  
-    return render_template("admin_farmer_option.html",details=details)
-    # return details
+    cur.execute("SELECT amount FROM farmer_donation")
+    donated_amount = ','.join(str(amount[0]) for amount in cur.fetchall())
+    return render_template("admin_farmer_option.html", details=details, donated_amount=donated_amount)
+
+    # return donated_amount
 
 @app.route('/admin_users/farmers/update/<string:SL_No>', methods=['POST'])
 def update_farmer_status(SL_No):
     sno = SL_No
+    name = request.form['name']
+    email = request.form['email']
+    phone = request.form['phone']
+    address = request.form['address']
+    farmer_id = request.form['farmer_id']
+    
     status = request.form['status']
+    amount = request.form['donation_amount'] 
     
     cur = mysql.connection.cursor()
     cur.execute("UPDATE farmer_details SET Status = %s WHERE name = %s", (status, sno))
+    cur.execute("insert into farmer_donation(name,email,phone,address,farmer_id,amount) value(%s,%s,%s,%s,%s,%s)", (name,email,phone,address,farmer_id,amount))
+
+
     mysql.connection.commit()
     cur.close()
     
     flash('Status updated successfully!', 'success')
     # return sno
     return redirect(url_for('admin_user_farmer'))
+    # return donated_amount
+
+
 
 @app.route('/admin_users/NGO')
 def admin_user_NGO():
     cur = mysql.connection.cursor()
-   
-    
+
+  
     cur.execute("SELECT ID, NGO_NAME, Email, Phone, City, NGO_REGISTRATION_ID,AMOUNT,status FROM NGO_request_details ")
     details = cur.fetchall()
-  
+    
     return render_template("admin_NGO_option.html",details=details)
     # return details
     # return render_template("admin_NGO_option.html")
@@ -448,9 +530,22 @@ def admin_user_NGO():
 def update_NGO_status(SL_No):
     sno = SL_No
     status = request.form['status']
+    name = request.form['name']
+    email = request.form['email']
+    phone = request.form['phone']
+    address = request.form['address']
+    NGO_id = request.form['ngo_id']
     
+    status = request.form['status']
+    amount = request.form['donation_amount'] 
+
+
+   
     cur = mysql.connection.cursor()
     cur.execute("UPDATE NGO_request_details SET Status = %s WHERE id = %s", (status, sno))
+    
+    cur.execute("insert into NGO_donation(name,email,phone,address,NGO_id,amount) value(%s,%s,%s,%s,%s,%s)", (name,email,phone,address,NGO_id,amount))
+
     mysql.connection.commit()
     cur.close()
     
@@ -470,6 +565,10 @@ def admin_user_donors():
   
     return render_template("admin_donors_option.html",details=details)
 
+
+@app.route('/admin_settings')
+def admin_settings():
+    return render_template("admin_settings.html")
 
 #DONORS
 @app.route('/donors/signup', methods=["GET", "POST"])
@@ -568,7 +667,21 @@ def donors_donate():
 
 @app.route("/donors_track")
 def donors_track():
-    return render_template("donors_track.html")
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT Name, Email, Phone, Address, Farmer_ID, amount FROM farmer_donation")
+    details = cur.fetchall()
+    return render_template("donors_track.html", details=details)
+
+
+
+
+
+@app.route("/donors_track_ngo")
+def donors_track_ngo():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT Name, Email, Phone, Address, NGO_ID, amount FROM NGO_donation")
+    details = cur.fetchall()
+    return render_template("donors_track_ngo.html",details=details)
 
 @app.route("/donors_card_details")
 def donors_card_details():
@@ -587,5 +700,4 @@ if __name__ == '__main__':
     app.run(host = "localhost",port=8000, debug=True)
     
     
-
 
